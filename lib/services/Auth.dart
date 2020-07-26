@@ -23,6 +23,19 @@ class AuthService {
     googleSignIn.signOut();
   }
 
+  checkAuthState(){
+    googleSignIn.onCurrentUserChanged.listen((account){
+      if(account != null){
+        print('User signed in!: $account');
+          isAuth = true;
+      }else{
+          isAuth = false;
+      }
+    }, onError: (err){
+      print("Error Sign in: $err");
+    });
+  }
+
   Future signInWithGoogle() async {
     print('start Google Sign In');
     try {

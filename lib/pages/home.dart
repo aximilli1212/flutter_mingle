@@ -2,31 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mingle/services/Auth.dart';
 
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-
   final auth = AuthService();
-
-
 
   @override
   initState(){
     super.initState();
+    auth.checkAuthState();
 
-
-    googleSignIn.signInSilently(suppressErrors: false).then((value) => {
-      handleSilentSignIn(value)
+    //Reauthenticate user when app is opened.
+    auth.googleSignIn.signInSilently(suppressErrors: false).then((value) => {
+      auth.handleSilentSignIn(value)
     });
-
-
   }
-
-
 
   Widget buildAuthScreen(){
      return Scaffold(
