@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
-final GoogleSignIn googleSignIn = GoogleSignIn();
+import 'package:flutter_mingle/services/Auth.dart';
 
 
 class Home extends StatefulWidget {
@@ -15,74 +10,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  final auth = AuthService();
 
-  bool isAuth = false;
-//
-//  login(){
-//    googleSignIn.signIn();
-//  }
 
-  logout(){
-        googleSignIn.signOut();
+
+  @override
+  initState(){
+    super.initState();
+
+
+    googleSignIn.signInSilently(suppressErrors: false).then((value) => {
+      handleSilentSignIn(value)
+    });
+
+
   }
-
-  Future signInWithGoogle() async {
-    print('start Google Sign In');
-    try {
-
-      GoogleSignIn goog = new GoogleSignIn(scopes: ["email"]);
-
-      GoogleSignInAccount googleUser = await goog.signIn();
-      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-      print(googleAuth);
-      print('Signin Good =================>');
-      return googleAuth;
-    } catch (e) {
-      print(e.toString());
-      print('Signin Error =================>');
-
-      return null;
-    }
-  }
-
-  handleSilentSignIn(account){
-    if(account != null){
-      print('User signed in!: $account');
-      setState((){
-        isAuth = true;
-      });
-    }else{
-      setState((){
-        isAuth = false;
-      });
-    }
-  }
-//
-//  @override
-//  initState(){
-//    super.initState();
-//    googleSignIn.onCurrentUserChanged.listen((account){
-//      if(account != null){
-//        print('User signed in!: $account');
-//        setState((){
-//          isAuth = true;
-//        });
-//      }else{
-//         setState((){
-//           isAuth = false;
-//         });
-//      }
-//    }, onError: (err){
-//      print("Error Sign in: $err");
-//    });
-//
-//    googleSignIn.signInSilently(suppressErrors: false).then((value) => {
-//      handleSilentSignIn(value)
-//    });
-//
-//
-//  }
 
 
 
@@ -117,7 +59,7 @@ class _HomeState extends State<Home> {
               GestureDetector(
 //                onTap: ()=> login(),
                 onTap: (){
-                  signInWithGoogle();
+                  auth.signInWithGoogle();
                 },
                 child: Container(
                   width: 260.0,
@@ -140,6 +82,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return isAuth? buildAuthScreen() : buildUnAuthScreen();
+    return auth.authState() ? buildAuthScreen() : buildUnAuthScreen();
   }
 }
