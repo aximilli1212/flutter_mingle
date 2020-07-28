@@ -47,10 +47,13 @@ class AuthService {
 
       print(googleAuth);
       print('Signin Good =================>');
+      isAuth = true;
+      print('isAuth State $isAuth');
       return googleAuth;
     } catch (e) {
       print(e.toString());
       print('Signin Error =================>');
+      isAuth = false;
 
       return null;
     }

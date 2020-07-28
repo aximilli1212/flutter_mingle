@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mingle/services/Auth.dart';
+import 'AuthScreen.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final auth = AuthService();
+  PageController _pageController;
 
   @override
   initState(){
@@ -21,14 +23,13 @@ class _HomeState extends State<Home> {
     });
   }
 
-  Widget buildAuthScreen(){
-     return Scaffold(
-       backgroundColor: Colors.grey,
-       body: Container(
-         child: Text('I am Authenticated'),
-       ),
-     );
+  @override
+  dispose(){
+    super.dispose();
+    _pageController.dispose();
   }
+
+
 
   Scaffold buildUnAuthScreen(){
       return Scaffold(
@@ -75,6 +76,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return auth.authState() ? buildAuthScreen() : buildUnAuthScreen();
+    return auth.authState() ? AuthScreen() : buildUnAuthScreen();
   }
 }
