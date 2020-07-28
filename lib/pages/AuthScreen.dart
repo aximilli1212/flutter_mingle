@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mingle/pages/profile.dart';
+import 'package:flutter_mingle/pages/upload.dart';
 
 import 'activity_feed.dart';
 
