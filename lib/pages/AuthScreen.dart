@@ -55,7 +55,14 @@ class _AuthScreenState extends State<AuthScreen> {
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: pageIndex,
         onTap: movePage,
-        activeColor: Theme.of(context).primaryColor,,
+        activeColor: Theme.of(context).primaryColor,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+          BottomNavigationBarItem(icon: Icon(Icons.whatshot)),
+        ],
       ),
     );
   }
