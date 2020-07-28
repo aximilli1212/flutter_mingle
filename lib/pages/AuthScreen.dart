@@ -39,13 +39,12 @@ class _AuthScreenState extends State<AuthScreen> {
     }
 
     movePage(int pageIndex){
-       _pageController.jumpToPage(pageIndex);
+       _pageController.animateToPage(pageIndex,duration: Duration(milliseconds: 500), curve: Curves.easeInOut );
     }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: header(context),
       body: PageView(
        children: <Widget>[
          Timeline(),

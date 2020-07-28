@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mingle/widgets/header.dart';
 
 class Timeline extends StatefulWidget {
   @override
@@ -8,6 +9,12 @@ class Timeline extends StatefulWidget {
 class _TimelineState extends State<Timeline> {
   @override
   Widget build(context) {
-    return Text("Timeline");
+    return Scaffold(
+      appBar: header(context, isAppTitle: true, titleText: 'FlutterShare'),
+      body: Container(
+        color: Colors.red,
+        child: Text("sumanguru"),
+      ),
+    );
   }
 }
