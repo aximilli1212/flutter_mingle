@@ -4,6 +4,7 @@ import 'package:flutter_mingle/pages/profile.dart';
 import 'package:flutter_mingle/pages/search.dart';
 import 'package:flutter_mingle/pages/timeline.dart';
 import 'package:flutter_mingle/pages/upload.dart';
+import 'package:flutter_mingle/widgets/header.dart';
 
 import 'activity_feed.dart';
 
@@ -44,6 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: header(context),
       body: PageView(
        children: <Widget>[
          Timeline(),
