@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'activity_feed.dart';
@@ -32,6 +33,10 @@ class _AuthScreenState extends State<AuthScreen> {
       });
     }
 
+    movePage(){
+
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +50,12 @@ class _AuthScreenState extends State<AuthScreen> {
        ],
         controller: _pageController,
         onPageChanged: onPageChanged,
+        physics: NeverScrollableScrollPhysics(),
+      ),
+      bottomNavigationBar: CupertinoTabBar(
+        currentIndex: pageIndex,
+        onTap: movePage,
+        activeColor: Theme.of(context).primaryColor,,
       ),
     );
   }
