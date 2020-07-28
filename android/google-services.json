@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "405717078318",
+    "firebase_url": "https://flutter-mingle.firebaseio.com",
+    "project_id": "flutter-mingle",
+    "storage_bucket": "flutter-mingle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405717078318:android:db7114b5bb7591506deabf",
+        "android_client_info": {
+          "package_name": "com.agroinnovagh.flutter_mingle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405717078318-s08eap285busu52dq81jloakms2gdqfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6JPj6JTYcm1TAwZAcRlLZ1ScmDI1JjTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405717078318-s08eap285busu52dq81jloakms2gdqfb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
