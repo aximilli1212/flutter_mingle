@@ -10,11 +10,13 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   PageController _pageController;
+  int pageIndex = 0;
 
     @override
     void initState() {
     super.initState();
     _pageController = PageController();
+    this.pageIndex = 1;
     // Add code after super
     }
 
@@ -22,6 +24,12 @@ class _AuthScreenState extends State<AuthScreen> {
     dispose(){
       super.dispose();
       _pageController.dispose();
+    }
+
+    onPageChanged(int pageIndex){
+      setState((){
+        this.pageIndex = pageIndex;
+      });
     }
 
   @override
@@ -35,6 +43,8 @@ class _AuthScreenState extends State<AuthScreen> {
          Search(),
          Profile(),
        ],
+        controller: _pageController,
+        onPageChanged: onPageChanged,
       ),
     );
   }
