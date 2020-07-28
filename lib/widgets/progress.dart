@@ -11,5 +11,10 @@ circularProgress() {
 }
 
 linearProgress() {
-  return Text("linear progress");
+  return Container(
+    padding: EdgeInsets.only(bottom: 10.0),
+    child: LinearProgressIndicator(
+      valueColor: AlwaysStoppedAnimation(Colors.purple) ,
+    ),
+  );
 }
