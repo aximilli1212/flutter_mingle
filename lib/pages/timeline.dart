@@ -26,12 +26,36 @@ class _TimelineState extends State<Timeline> {
      });
   }
 
-  getUserById(){
+  getAdminUsers() async{
+    final QuerySnapshot snapshot = await userRef.where("isAdmin", isEqualTo: true).getDocuments();
+    snapshot.documents.forEach((DocumentSnapshot doc){
+      print(doc.data);
+    });
+  }
+
+  getCompoundQuery() async{
+    print('we getting..');
+    final QuerySnapshot snapshot = await userRef
+        .limit(2)
+        .where("isAdmin", isEqualTo: true)
+        .where("isAdmin", isEqualTo: true)
+//        .orderBy("username", descending: true)
+        .getDocuments();
+    if(snapshot != null){
+      snapshot.documents.forEach((DocumentSnapshot doc){
+        print(doc.data);
+      });
+    }else{
+      print(snapshot);
+    }
+
+  }
+
+  getUserById() async {
     final String id = "XDAENsJBnxKzEE5VSZCe";
-    userRef.document(id).get().then((DocumentSnapshot doc){
+     final DocumentSnapshot doc  = await userRef.document(id).get();
         print(doc.data);
         print(doc.documentID);
-    });
   }
 
   @override
@@ -59,6 +83,13 @@ class _TimelineState extends State<Timeline> {
               ),
               onPressed: getUserById,
               child: Text('Get User by ID.'),
+            ),
+             RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0)
+              ),
+              onPressed: getCompoundQuery,
+              child: Text('Compount Query'),
             )
 
       ],
