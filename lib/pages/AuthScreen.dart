@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mingle/pages/profile.dart';
+import 'package:flutter_mingle/pages/search.dart';
+import 'package:flutter_mingle/pages/timeline.dart';
 import 'package:flutter_mingle/pages/upload.dart';
 
 import 'activity_feed.dart';
@@ -35,8 +37,8 @@ class _AuthScreenState extends State<AuthScreen> {
       });
     }
 
-    movePage(){
-
+    movePage(int pageIndex){
+       _pageController.jumpToPage(pageIndex);
     }
 
   @override
