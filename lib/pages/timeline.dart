@@ -14,7 +14,24 @@ class _TimelineState extends State<Timeline> {
   @override
   void initState() {
     // TODO: implement initState
+    getUsers();
     super.initState();
+  }
+
+  getUsers(){
+     userRef.getDocuments().then((QuerySnapshot snapshot){
+         snapshot.documents.forEach((DocumentSnapshot doc){
+            print(doc.documentID);
+         });
+     });
+  }
+
+  getUserById(){
+    final String id = "XDAENsJBnxKzEE5VSZCe";
+    userRef.document(id).get().then((DocumentSnapshot doc){
+        print(doc.data);
+        print(doc.documentID);
+    });
   }
 
   @override
@@ -31,6 +48,17 @@ class _TimelineState extends State<Timeline> {
               width: 300.0,
               height: 300.0,
               color: Colors.orange,
+            ),
+            RaisedButton(
+              onPressed: getUsers,
+              child: Text('Hit it up'),
+            ),
+            RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0)
+              ),
+              onPressed: getUserById,
+              child: Text('Get User by ID.'),
             )
 
       ],
