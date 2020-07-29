@@ -26,7 +26,6 @@ class CustomSliver extends StatelessWidget {
                     textInputAction: TextInputAction.done,
                     cursorColor: Colors.black,
                     autofocus: false,
-                    style: TextField_Style,
                     decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.transparent,

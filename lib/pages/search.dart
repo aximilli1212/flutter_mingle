@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'customSliver.dart';
+
 class Search extends StatefulWidget {
   @override
   _SearchState createState() => _SearchState();
@@ -8,7 +10,19 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
-    return Text('Search');
+    return Container(
+      child: Column(
+        children: <Widget>[
+          RaisedButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              CustomSliver();
+            }));
+          },
+            child: Text('Custom Sliver'),
+          )
+        ],
+      ),
+    );
   }
 }
 
