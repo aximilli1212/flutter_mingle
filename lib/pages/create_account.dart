@@ -6,8 +6,14 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  final _formKey = GlobalKey<FormState>();
 
   String username;
+
+  void submit(){
+    _formKey.currentState.save();
+    Navigator.pop(context, username);
+  }
 
   @override
   Widget build(BuildContext parentContext) {
@@ -27,6 +33,7 @@ class _CreateAccountState extends State<CreateAccount> {
               padding: EdgeInsets.all(16.0),
               child: Container(
                 child: Form(
+                  key: _formKey,
                   child: TextFormField(
                     onSaved: (val)=>username = val,
                     decoration: InputDecoration(
@@ -40,20 +47,22 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
             ),
             GestureDetector(
-              onTap: (){
-
-              },
+              onTap: submit,
               child: Container(
+                height: 50.0,
+                width: 350.0,
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   borderRadius: BorderRadius.circular(7.0),
                 ),
-                child: Text("Submit",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold
-                ),
+                child: Center(
+                  child: Text("Submit",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold
+                  ),
+                  ),
                 ),
               ),
             )

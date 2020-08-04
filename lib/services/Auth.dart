@@ -14,6 +14,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final  usersRef = Firestore.instance.collection('users')  ;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  final timestamp = DateTime.now();
 
 
 
@@ -29,12 +30,15 @@ class AuthService {
     googleSignIn.signOut();
   }
 
-  checkAuthState(){
+  checkAuthState(BuildContext context){
     googleSignIn.onCurrentUserChanged.listen((account){
       if(account != null){
         print('User signed in!: $account');
-          isAuth = true;
+        createUserInFirestore(context);
+
+        isAuth = true;
       }else{
+
           isAuth = false;
       }
     }, onError: (err){
@@ -55,7 +59,6 @@ class AuthService {
       print('Signin Good =================>');
       isAuth = true;
       print('isAuth State $isAuth');
-      createUserInFirestore;
       return googleAuth;
     } catch (e) {
       print(e.toString());
@@ -80,7 +83,19 @@ class AuthService {
     final DocumentSnapshot doc = await usersRef.document(user.id).get();
 
     if(!doc.exists){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateAccount()));
+      final username = await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateAccount()));
+
+      usersRef.document(user.id).setData({
+        "id": user.id,
+        "username": username,
+        "email": user.email,
+        "photoUrl": user.photoUrl,
+        "displayName": user.displayName,
+        "bio": "",
+        "timestamp": timestamp,
+
+      });
+
     }else{
       print(user.id);
       print("User Exits please");
