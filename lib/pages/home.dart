@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mingle/services/Auth.dart';
+import 'package:flutter_mingle/pages/create_account.dart';
 import 'AuthScreen.dart';
 
 class Home extends StatefulWidget {
@@ -65,7 +66,11 @@ class _HomeState extends State<Home> {
 
                   ),
                 ),
-              )
+              ),
+              RaisedButton(
+                child: Text('Create Account'),
+                onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateAccount())),
+              ),
             ],
           ),
         ),
