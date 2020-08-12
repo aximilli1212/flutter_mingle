@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mingle/services/Auth.dart';
 import 'package:flutter_mingle/pages/create_account.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'AuthScreen.dart';
 
 class Home extends StatefulWidget {
@@ -12,6 +15,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final auth = AuthService();
   PageController _pageController;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final  usersRef = Firestore.instance.collection('users')  ;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  final timestamp = DateTime.now();
 
   @override
   initState(){
@@ -29,6 +37,32 @@ class _HomeState extends State<Home> {
     super.dispose();
     _pageController.dispose();
   }
+
+
+  createUserInFirestore(BuildContext context) async {
+    final GoogleSignInAccount user = googleSignIn.currentUser;
+    final DocumentSnapshot doc = await usersRef.document(user.id).get();
+
+    if(!doc.exists){
+      final username = await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateAccount()));
+
+      usersRef.document(user.id).setData({
+        "id": user.id,
+        "username": username,
+        "email": user.email,
+        "photoUrl": user.photoUrl,
+        "displayName": user.displayName,
+        "bio": "",
+        "timestamp": timestamp,
+
+      });
+
+    }else{
+      print(user.id);
+      print("User Exits please");
+    }
+  }
+
 
 
 
