@@ -68,6 +68,7 @@ class _HomeState extends State<Home> {
 
   Scaffold buildUnAuthScreen(){
       return Scaffold(
+
         body: Container(
           alignment: Alignment.center,
           decoration: BoxDecoration(

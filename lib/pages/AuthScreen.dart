@@ -9,6 +9,7 @@ import 'package:flutter_mingle/services/Auth.dart';
 
 
 import 'activity_feed.dart';
+import 'create_account.dart';
 
 class AuthScreen extends StatefulWidget {
 
@@ -51,10 +52,6 @@ class _AuthScreenState extends State<AuthScreen> {
       body: PageView(
        children: <Widget>[
 //         Timeline(),
-       RaisedButton(
-          child: Text('logout'),
-         onPressed: auth.logout(),
-      ),
          ActivityFeed(),
          Upload(),
          Search(),
