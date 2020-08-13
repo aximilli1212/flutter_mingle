@@ -43,9 +43,12 @@ class _HomeState extends State<Home> {
     final GoogleSignInAccount user = googleSignIn.currentUser;
     final DocumentSnapshot doc = await usersRef.document(user.id).get();
 
+    print(user.id);
     if(!doc.exists){
+
       final username = await Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateAccount()));
 
+      print(username);
       usersRef.document(user.id).setData({
         "id": user.id,
         "username": username,
@@ -62,8 +65,6 @@ class _HomeState extends State<Home> {
       print("User Exits please");
     }
   }
-
-
 
 
   Scaffold buildUnAuthScreen(){
