@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_mingle/models/user.dart';
 import 'package:flutter_mingle/pages/create_account.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 
 final usersRef = Firestore.instance.collection('users');
+User activeUser;
+
 
 
 class AuthService {
@@ -20,6 +23,9 @@ class AuthService {
 
   authState(){
     return isAuth;
+  }
+  currentUser(){
+    return activeUser;
   }
 
   login(){
@@ -80,7 +86,7 @@ class AuthService {
 
   createUserInFirestore(BuildContext context) async {
     final GoogleSignInAccount user = googleSignIn.currentUser;
-    final DocumentSnapshot doc = await usersRef.document(user.id).get();
+    DocumentSnapshot doc = await usersRef.document(user.id).get();
 
     if(!doc.exists){
 
@@ -95,11 +101,18 @@ class AuthService {
 
       });
 
+      doc = await usersRef.document(user.id).get();
+
     }else{
       print(user.id);
       print("User Exits please");
     }
-  }
+
+    activeUser = User.fromDocument(doc);
+
+    print(activeUser);
+    print(activeUser.username);
+   }
 
 
 }
