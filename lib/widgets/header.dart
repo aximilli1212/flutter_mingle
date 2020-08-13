@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-AppBar header(context, {bool isAppTitle=false, String titleText}) {
+AppBar header(context, {bool isAppTitle=false, String titleText, bool removeBackButton}) {
   return AppBar(
+    automaticallyImplyLeading: removeBackButton? true: false,
     title: Text(isAppTitle? 'FlutterMingle': titleText, style: TextStyle(
       color: Colors.white,
       fontFamily: isAppTitle? "Signatra": "",
