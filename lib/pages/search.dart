@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mingle/models/user.dart';
@@ -61,11 +62,13 @@ class _SearchState extends State<Search> {
        if(!snapshot.hasData){
          return circularProgress();
        }
-       List<Text> searchResults = [];
+       List<UserResult> searchResults = [];
 
        snapshot.data.documents.forEach((doc){
          User user = User.fromDocument(doc);
-         searchResults.add(Text(user.username));
+         
+         UserResult searchResult = UserResult(user);
+         searchResults.add(searchResult);
        });
 
        return ListView(
@@ -76,15 +79,13 @@ class _SearchState extends State<Search> {
  }
 
 
-
-
  AppBar buildSearchField() {
    return AppBar(
      backgroundColor: Colors.white,
      title: TextFormField(
        controller: searchController,
        decoration: InputDecoration(
-           hintText: "Search for a user ... ",
+           hintText: "Search for a user ...",
            filled: true,
            prefixIcon: Icon(
              Icons.account_box,
@@ -117,9 +118,41 @@ class _SearchState extends State<Search> {
 
 
 class UserResult extends StatelessWidget {
+  final User user;
+
+  UserResult(this.user);
+
   @override
   Widget build(BuildContext context) {
-    return Text("User Result");
+    return Container(
+      color: Theme.of(context).primaryColor,
+      child: Column(
+        children: <Widget>[
+          GestureDetector(
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey,
+                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+              ),
+              title: Text(user.displayName,
+              style: TextStyle(
+                color:Colors.white,
+                fontWeight: FontWeight.w600,
+
+              ),
+              ),
+              subtitle: Text(user.username,
+              style: TextStyle(
+                color: Colors.white,
+                fontStyle: FontStyle.italic,
+              ),),
+            ),
+          ),
+          Divider(height: 2.0, color: Colors.white54),
+
+        ],
+      ),
+    );
   }
 }
 
