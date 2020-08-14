@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mingle/widgets/header.dart';
 
@@ -7,18 +9,30 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
 
   String username;
 
   void submit(){
-    _formKey.currentState.save();
-    Navigator.pop(context, username);
+    final form = _formKey.currentState;
+
+    if(form.validate()){
+      form.save();
+
+      SnackBar snackBar = SnackBar(content: Text("Welcome $username"));
+      _scaffoldKey.currentState.showSnackBar(snackBar);
+
+      Timer(Duration(seconds: 2), (){
+        Navigator.pop(context, username);
+      });
+    }
   }
 
   @override
   Widget build(BuildContext parentContext) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: header(context, titleText: "Profile Setup"),
       body: ListView(
         children: <Widget>[
@@ -40,6 +54,18 @@ class _CreateAccountState extends State<CreateAccount> {
                     child: Form(
                       key: _formKey,
                       child: TextFormField(
+                        autovalidate: true,
+                        validator: (val){
+                          if(val.trim().length < 3 || val.isEmpty){
+                            return "username is too short";
+                          }else if(val.trim().length > 20){
+                            return "username too long";
+                          }
+                          else
+                            {
+                            return null;
+                          }
+                        },
                         onSaved: (val) => username = val,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
