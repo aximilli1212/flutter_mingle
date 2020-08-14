@@ -38,7 +38,9 @@ class _CreateAccountState extends State<CreateAccount> {
                   padding: EdgeInsets.all(16.0),
                   child: Container(
                     child: Form(
+                      key: _formKey,
                       child: TextFormField(
+                        onSaved: (val) => username = val,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: "Username",
@@ -50,8 +52,21 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                 ),
                 GestureDetector(
+                  onTap: submit,
                   child: Container(
-
+                    width: 200.0,
+                    height: 50.0,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(child: Text('Create Username', style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),)),
+                    ),
                   ),
                 )
 
