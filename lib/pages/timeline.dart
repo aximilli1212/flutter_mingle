@@ -34,16 +34,24 @@ class _TimelineState extends State<Timeline> {
   });
   }
 
-  updateUser(){
-    usersRef.document('main-string').updateData({
-      "username": "Okponglu Harvard",
-      "postsCount": 0,
-      "isAdmin": false,
-    });
+  updateUser() async{
+
+    //Check if document exists before update
+
+    final DocumentSnapshot doc = await  usersRef.document('main-string').get();
+
+    if(doc.exists) {
+      doc.reference.updateData({
+        "username": "Okponglu Harvard",
+        "postsCount": 0,
+        "isAdmin": false,
+      });
+    }
   }
 
-  deleteUser(){
-    usersRef.document('main-string').delete();
+  deleteUser() async{
+    final DocumentSnapshot doc = await  usersRef.document('main-string').get();
+    doc.reference.delete();
   }
 
   getUsers(){
