@@ -39,6 +39,11 @@ Container buildNoContent(BuildContext context){
 
 class _SearchState extends State<Search> {
  Future<QuerySnapshot> searchResultsFuture;
+ TextEditingController searchController = TextEditingController();
+
+ clearSearch(){
+   searchController.clear();
+ }
 
  handleSearch(String query) {
    Future<QuerySnapshot> users = usersRef.
@@ -77,6 +82,7 @@ class _SearchState extends State<Search> {
    return AppBar(
      backgroundColor: Colors.white,
      title: TextFormField(
+       controller: searchController,
        decoration: InputDecoration(
            hintText: "Search for a user ... ",
            filled: true,
@@ -86,9 +92,7 @@ class _SearchState extends State<Search> {
            ),
            suffixIcon: IconButton(
              icon: Icon(Icons.clear),
-             onPressed: ()=>{
-               print('cleared'),
-             },
+             onPressed: ()=> clearSearch,
            )
        ),
        onFieldSubmitted: handleSearch,
