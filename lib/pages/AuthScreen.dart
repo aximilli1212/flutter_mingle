@@ -5,6 +5,8 @@ import 'package:flutter_mingle/pages/search.dart';
 import 'package:flutter_mingle/pages/timeline.dart';
 import 'package:flutter_mingle/pages/upload.dart';
 import 'package:flutter_mingle/widgets/header.dart';
+import 'package:flutter_mingle/services/Auth.dart';
+
 
 import 'activity_feed.dart';
 
@@ -15,6 +17,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  final auth = AuthService();
   PageController _pageController;
   int pageIndex = 0;
 
@@ -47,7 +50,11 @@ class _AuthScreenState extends State<AuthScreen> {
     return Scaffold(
       body: PageView(
        children: <Widget>[
-         Timeline(),
+//         Timeline(),
+       RaisedButton(
+          child: Text('logout'),
+         onPressed: auth.logout(),
+      ),
          ActivityFeed(),
          Upload(),
          Search(),

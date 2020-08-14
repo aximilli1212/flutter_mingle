@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   @override
   initState(){
     super.initState();
-    auth.checkAuthState();
+    auth.checkAuthState(context);
 
     //Reauthenticate user when app is opened.
     auth.googleSignIn.signInSilently(suppressErrors: false).then((value) => {
@@ -51,7 +51,6 @@ class _HomeState extends State<Home> {
                 fontSize: 90.0,
               )),
               GestureDetector(
-//                onTap: ()=> login(),
                 onTap: (){
                   auth.signInWithGoogle();
                 },
