@@ -30,18 +30,19 @@ AppBar buildSearchField() {
   );
 }
 
-Container buildNoContent(){
+Container buildNoContent(BuildContext context){
+  final Orientation orientation = MediaQuery.of(context).orientation;
    return Container(
       child:Center(
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[
-              SvgPicture.asset('assets/images/search.svg', height: 300),
+              SvgPicture.asset('assets/images/search.svg', height: orientation == Orientation.portrait?  300.0:200.0),
             Text(
               "Find Users",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 fontStyle: FontStyle.italic,
                 fontSize: 60.0,
                 fontWeight: FontWeight.w600,
@@ -61,7 +62,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildSearchField(),
-      body: buildNoContent(),
+      body: buildNoContent(context),
     );
   }
 
