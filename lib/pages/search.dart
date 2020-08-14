@@ -92,7 +92,7 @@ class _SearchState extends State<Search> {
            ),
            suffixIcon: IconButton(
              icon: Icon(Icons.clear),
-             onPressed: ()=> clearSearch,
+             onPressed: clearSearch,
            )
        ),
        onFieldSubmitted: handleSearch,
