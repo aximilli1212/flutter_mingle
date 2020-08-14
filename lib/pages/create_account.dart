@@ -6,6 +6,9 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+
+  String username;
+
   @override
   Widget build(BuildContext parentContext) {
     return Container(
@@ -25,6 +28,7 @@ class _CreateAccountState extends State<CreateAccount> {
               child: Container(
                 child: Form(
                   child: TextFormField(
+                    onSaved: (val)=>username = val,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "Username",
@@ -36,10 +40,20 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
             ),
             GestureDetector(
+              onTap: (){
+
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.blue,
-                  borderRadius:
+                  borderRadius: BorderRadius.circular(7.0),
+                ),
+                child: Text("Submit",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold
+                ),
                 ),
               ),
             )
