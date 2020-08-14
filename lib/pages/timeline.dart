@@ -21,12 +21,6 @@ class _TimelineState extends State<Timeline> {
   }
 
   creatUser(){
-//    usersRef.add({  // for automatic id
-//      "username": "Alipopo Mangao",
-//      "postsCount": 5,
-//      "isAdmin": false,
-//    });
-
   usersRef.document('main-string').setData({
     "username": "Okponglu Harvard",
     "postsCount": 0,
